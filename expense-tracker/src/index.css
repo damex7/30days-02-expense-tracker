@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-note: #edf2ec;     /* page background, pale banknote green */
+  --color-surface: #fbfcfa;  /* panels */
+  --color-ink: #122019;      /* text */
+  --color-green: #0e7c4a;    /* primary actions */
+  --color-over: #d6452f;     /* over budget, delete */
+  --color-muted: #5c6b62;    /* secondary text */
+  --color-line: #cfdbd1;     /* borders */
+
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-note font-sans text-ink antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-green);
+    outline-offset: 2px;
+  }
+}
+
+/* Money always lines up in columns */
+.money {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The undo bar slides up when you delete something (a response to an action). */
+@keyframes rise {
+  from { transform: translateY(1rem); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.rise { animation: rise 200ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  * { transition: none !important; }
+}
