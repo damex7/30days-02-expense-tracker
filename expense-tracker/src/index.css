@@ -1,24 +1,44 @@
 @import "tailwindcss";
 
+/* Adire theme: indigo cloth and marigold.
+   Components use these names (bg-page, text-primary ...), never raw hex,
+   so switching theme only means changing the values below. */
 @theme {
-  --color-note: #edf2ec;     /* page background, pale banknote green */
-  --color-surface: #fbfcfa;  /* panels */
-  --color-ink: #122019;      /* text */
-  --color-green: #0e7c4a;    /* primary actions */
-  --color-over: #d6452f;     /* over budget, delete */
-  --color-muted: #5c6b62;    /* secondary text */
-  --color-line: #cfdbd1;     /* borders */
+  --color-page: #eef0f8;       /* page background */
+  --color-surface: #fbfcff;    /* cards and panels */
+  --color-ink: #151b45;        /* main text */
+  --color-muted: #5a6190;      /* secondary text */
+  --color-line: #d6daec;       /* borders */
+  --color-primary: #2b3990;    /* buttons, links, "left" amount */
+  --color-on-primary: #ffffff; /* text on primary buttons */
+  --color-accent: #f2a93b;     /* marigold highlights */
+  --color-over: #d9432f;       /* over budget, delete */
 
   --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
+/* Dark mode: the same names, night-indigo values.
+   Applied when <html data-theme="dark"> (set by useTheme). */
+:root[data-theme="dark"] {
+  --color-page: #0f1330;
+  --color-surface: #181d45;
+  --color-ink: #eceefb;
+  --color-muted: #a3aad6;
+  --color-line: #2e3568;
+  --color-primary: #8c9bff;
+  --color-on-primary: #0f1330;
+  --color-accent: #f5b955;
+  --color-over: #ff7a66;
+  color-scheme: dark; /* dark date picker, dropdowns and scrollbars */
+}
+
 @layer base {
   body {
-    @apply bg-note font-sans text-ink antialiased;
+    @apply bg-page font-sans transition-colors text-ink antialiased;
   }
   :focus-visible {
-    outline: 3px solid var(--color-green);
+    outline: 3px solid var(--color-primary);
     outline-offset: 2px;
   }
 }

@@ -22,7 +22,7 @@ export default function ExpenseList({ expenses, editingId, onEdit, onDelete }) {
               {items.map((e) => {
                 const cat = categoryById[e.category] ?? categoryById.other;
                 return (
-                  <li key={e.id} className={`flex items-center gap-3 border-b border-line/60 py-3 ${editingId === e.id ? "bg-green/5" : ""}`}>
+                  <li key={e.id} className={`flex items-center gap-3 border-b border-line/60 py-3 ${editingId === e.id ? "bg-primary/10" : ""}`}>
                     <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: cat.color }} aria-hidden="true" />
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-medium">{e.description}</p>

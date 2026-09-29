@@ -20,7 +20,7 @@ export default function MonthSwitcher({ month, onChange }) {
         ›
       </button>
       {month !== current && (
-        <button type="button" onClick={() => onChange(current)} className="ml-1 text-sm font-bold text-green underline underline-offset-4">
+        <button type="button" onClick={() => onChange(current)} className="ml-1 text-sm font-bold text-primary underline underline-offset-4">
           This month
         </button>
       )}

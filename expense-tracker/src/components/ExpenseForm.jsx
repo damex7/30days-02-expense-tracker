@@ -75,7 +75,7 @@ export default function ExpenseForm({ initial, onSubmit, onCancel }) {
       </div>
 
       <div className="mt-5 flex gap-2">
-        <button className="flex-1 rounded-lg bg-green px-4 py-2.5 font-bold text-surface hover:bg-ink">
+        <button className="flex-1 rounded-lg bg-primary px-4 py-2.5 font-bold text-on-primary hover:bg-ink hover:text-surface">
           {initial ? "Save changes" : "Add expense"}
         </button>
         {initial && (

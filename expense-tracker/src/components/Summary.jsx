@@ -28,7 +28,7 @@ export default function Summary({ month, total, byCategory, budget, onBudgetChan
       {budget > 0 && (
         <p className="mt-2 text-muted">
           of {formatMoney(budget)} budget,{" "}
-          <span className={`font-bold ${over ? "text-over" : "text-green"}`}>
+          <span className={`font-bold ${over ? "text-over" : "text-primary"}`}>
             {over ? `${formatMoney(total - budget)} over` : `${formatMoney(budget - total)} left`}
           </span>
         </p>
@@ -57,11 +57,11 @@ export default function Summary({ month, total, byCategory, budget, onBudgetChan
               className="money mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2"
             />
           </label>
-          <button className="rounded-lg bg-green px-4 py-2 font-bold text-surface">Save</button>
+          <button className="rounded-lg bg-primary px-4 py-2 font-bold text-on-primary hover:bg-ink hover:text-surface">Save</button>
           <button type="button" onClick={() => setEditingBudget(false)} className="px-2 py-2 text-sm text-muted">Cancel</button>
         </form>
       ) : (
-        <button type="button" onClick={() => { setDraft(budget ? String(budget) : ""); setEditingBudget(true); }} className="mt-3 text-sm font-bold text-green underline underline-offset-4">
+        <button type="button" onClick={() => { setDraft(budget ? String(budget) : ""); setEditingBudget(true); }} className="mt-3 text-sm font-bold text-primary underline underline-offset-4">
           {budget > 0 ? "Change budget" : "Set a monthly budget"}
         </button>
       )}

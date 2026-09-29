@@ -1,12 +1,14 @@
-// Each category has a colour used in the budget strip and next to each expense.
+// Category colours for the Adire theme. They're mid-tones chosen to stay
+// visible on both the light and dark backgrounds, and none of them is red,
+// so they can't be confused with the over-budget warning.
 export const categories = [
-  { id: "food", label: "Food", color: "#0e7c4a" },
-  { id: "transport", label: "Transport", color: "#2f6fce" },
-  { id: "bills", label: "Bills", color: "#7a4fc9" },
-  { id: "shopping", label: "Shopping", color: "#e0932b" },
-  { id: "health", label: "Health", color: "#d6452f" },
-  { id: "fun", label: "Entertainment", color: "#c94f9a" },
-  { id: "other", label: "Other", color: "#6b7a71" },
+  { id: "food", label: "Food", color: "#f2a93b" },        // marigold
+  { id: "transport", label: "Transport", color: "#3fa7d6" }, // sky
+  { id: "bills", label: "Bills", color: "#6f7ff0" },       // light indigo
+  { id: "shopping", label: "Shopping", color: "#e9679a" }, // hibiscus
+  { id: "health", label: "Health", color: "#34b08a" },     // leaf
+  { id: "fun", label: "Entertainment", color: "#a86ce0" }, // violet
+  { id: "other", label: "Other", color: "#8a90ae" },       // slate
 ];
 
 export const categoryById = Object.fromEntries(categories.map((c) => [c.id, c]));

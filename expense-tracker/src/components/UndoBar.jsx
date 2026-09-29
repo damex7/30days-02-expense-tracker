@@ -10,7 +10,7 @@ export default function UndoBar({ expense, onUndo, onClose }) {
   return (
     <div role="status" className="rise fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-md items-center justify-between gap-4 rounded-xl bg-ink px-5 py-3 text-surface shadow-lg">
       <p className="truncate">Deleted “{expense.description}”</p>
-      <button type="button" onClick={onUndo} className="shrink-0 font-bold text-[#8fd9b3] underline underline-offset-4">
+      <button type="button" onClick={onUndo} className="shrink-0 font-bold text-accent underline underline-offset-4">
         Undo
       </button>
     </div>

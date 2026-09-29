@@ -1,5 +1,7 @@
 # Expense Tracker (Day 2 of 30)
 
+Adire theme: indigo cloth and marigold, with light and dark modes.
+
 Track spending by month and category, with a monthly budget. Built with React, Vite and Tailwind CSS.
 Data is saved in the browser with localStorage, so there's no account or backend.
 
@@ -24,5 +26,7 @@ Data is saved in the browser with localStorage, so there's no account or backend
 | Resetting a form with `key` | src/App.jsx (`<ExpenseForm key=...>`) |
 | Effect clean-up (timer) | src/components/UndoBar.jsx |
 | Currency formatting (Intl) | src/lib/format.js |
+| Light/dark theme with CSS variables | src/index.css (@theme and :root[data-theme="dark"]) |
+| Theme preference hook | src/hooks/useTheme.js, script in index.html |
 
 To use another currency, change CURRENCY and LOCALE in src/lib/format.js.

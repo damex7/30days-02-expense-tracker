@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage.js";
+import { useTheme } from "./hooks/useTheme.js";
 import { expensesReducer } from "./state/expensesReducer.js";
 import { makeSampleExpenses } from "./lib/sampleData.js";
 import { formatMonth, monthOf, todayISO } from "./lib/format.js";
@@ -10,11 +11,14 @@ import ExpenseForm from "./components/ExpenseForm.jsx";
 import CategoryFilter from "./components/CategoryFilter.jsx";
 import ExpenseList from "./components/ExpenseList.jsx";
 import UndoBar from "./components/UndoBar.jsx";
+import ThemeToggle from "./components/ThemeToggle.jsx";
 
 export default function App() {
   // Saved in the browser
   const [expenses, setExpenses] = useLocalStorage("expense-tracker:expenses", []);
   const [budget, setBudget] = useLocalStorage("expense-tracker:budget", 0);
+
+  const [theme, toggleTheme] = useTheme();
 
   // Only while the page is open
   const [month, setMonth] = useState(monthOf(todayISO()));
@@ -67,7 +71,10 @@ export default function App() {
     <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-8">
       <header className="flex flex-wrap items-center justify-between gap-4 py-6">
         <h1 className="text-2xl font-extrabold tracking-tight">Expenses</h1>
-        <MonthSwitcher month={month} onChange={setMonth} />
+        <div className="flex flex-wrap items-center gap-3">
+          <MonthSwitcher month={month} onChange={setMonth} />
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
       </header>
 
       <div className="grid items-start gap-8 lg:grid-cols-[24rem_1fr] lg:gap-12">
