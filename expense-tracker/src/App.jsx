@@ -12,6 +12,8 @@ import CategoryFilter from "./components/CategoryFilter.jsx";
 import ExpenseList from "./components/ExpenseList.jsx";
 import UndoBar from "./components/UndoBar.jsx";
 import ThemeToggle from "./components/ThemeToggle.jsx";
+import InfoButton from "./components/InfoButton.jsx";
+import DataPanel from "./components/DataPanel.jsx";
 
 export default function App() {
   // Saved in the browser
@@ -25,6 +27,7 @@ export default function App() {
   const [filter, setFilter] = useState("all");
   const [editing, setEditing] = useState(null);
   const [lastDeleted, setLastDeleted] = useState(null);
+  const [dataMessage, setDataMessage] = useState(null); // result of the last import
 
   // Run every change through the reducer, then save the result.
   const dispatch = (action) => setExpenses((current) => expensesReducer(current, action));
@@ -59,11 +62,24 @@ export default function App() {
 
   const closeUndo = useCallback(() => setLastDeleted(null), []);
 
+  function handleImport({ expenses: incoming, budget: importedBudget }) {
+    const existing = new Set(expenses.map((e) => e.id));
+    const added = incoming.filter((e) => !existing.has(e.id)).length;
+    dispatch({ type: "imported", expenses: incoming });
+    if (importedBudget && !budget) setBudget(importedBudget); // don't overwrite a budget you've set
+    if (added) {
+      const newest = incoming.reduce((a, b) => (a.date > b.date ? a : b));
+      setMonth(monthOf(newest.date)); // jump to the most recent imported month
+    }
+    return { added, duplicates: incoming.length - added };
+  }
+
   function handleClearAll() {
     if (window.confirm("Delete all expenses and your budget? This can't be undone.")) {
       dispatch({ type: "replaced", expenses: [] });
       setBudget(0);
       setEditing(null);
+      setDataMessage(null);
     }
   }
 
@@ -99,6 +115,7 @@ export default function App() {
                 className="mt-5 rounded-lg border border-ink px-4 py-2 font-bold hover:bg-ink hover:text-surface">
                 Load sample data
               </button>
+              <DataPanel compact expenses={expenses} budget={budget} onImport={handleImport} message={dataMessage} setMessage={setDataMessage} />
             </div>
           ) : (
             <>
@@ -112,13 +129,13 @@ export default function App() {
                   </p>
                 )}
               </div>
-              <button type="button" onClick={handleClearAll} className="mt-10 text-sm text-muted underline underline-offset-4 hover:text-over">
-                Clear all data
-              </button>
+              <DataPanel expenses={expenses} budget={budget} onImport={handleImport} onClearAll={handleClearAll} message={dataMessage} setMessage={setDataMessage} />
             </>
           )}
         </main>
       </div>
+
+      <InfoButton />
 
       {lastDeleted && (
         <UndoBar

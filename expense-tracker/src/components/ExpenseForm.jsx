@@ -84,6 +84,7 @@ export default function ExpenseForm({ initial, onSubmit, onCancel }) {
           </button>
         )}
       </div>
+      <p className="mt-3 text-sm text-muted">Saved only in this browser. Nothing is sent to a server.</p>
     </form>
   );
 }

@@ -10,7 +10,9 @@ Data is saved in the browser with localStorage, so there's no account or backend
 - Categories, dates and a total per day
 - Month switcher and category filter
 - Monthly budget strip that fills by category and turns red when you go over
-- Data saved in the browser; "Load sample data" for a quick demo
+- Data saved only in the visitor's browser; nothing is sent to a server
+- Download a backup (JSON), export to a spreadsheet (CSV), and restore from a backup
+- "Load sample data" for a quick demo
 
 ## Run it
     npm install
@@ -27,6 +29,8 @@ Data is saved in the browser with localStorage, so there's no account or backend
 | Effect clean-up (timer) | src/components/UndoBar.jsx |
 | Currency formatting (Intl) | src/lib/format.js |
 | Light/dark theme with CSS variables | src/index.css (@theme and :root[data-theme="dark"]) |
+| Downloading files and reading an uploaded file | src/lib/backup.js, src/components/DataPanel.jsx |
+| Validating untrusted input | parseBackup in src/lib/backup.js |
 | Theme preference hook | src/hooks/useTheme.js, script in index.html |
 
 To use another currency, change CURRENCY and LOCALE in src/lib/format.js.

@@ -11,6 +11,11 @@ export function expensesReducer(expenses, action) {
       return expenses.filter((e) => e.id !== action.id);
     case "restored":
       return [...expenses, action.expense];
+    case "imported": {
+      // Merge: keep what's here, add only expenses we don't already have.
+      const existing = new Set(expenses.map((e) => e.id));
+      return [...expenses, ...action.expenses.filter((e) => !existing.has(e.id))];
+    }
     case "replaced":
       return action.expenses;
     default:
